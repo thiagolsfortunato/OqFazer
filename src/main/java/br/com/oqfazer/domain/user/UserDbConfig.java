@@ -24,7 +24,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactory", basePackages = {"br.com.oqfazer.domain.user"})
+@EnableJpaRepositories(basePackages = {"br.com.oqfazer.domain.user"})
 public class UserDbConfig {
 
     @Primary
