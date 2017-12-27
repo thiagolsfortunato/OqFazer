@@ -1,5 +1,6 @@
 package br.com.oqfazer.domain.user;
 
+import br.com.oqfazer.exception.ExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,11 +30,11 @@ public class UserService {
      * Caso o usuario ja exista no banco de dados e retornado uma excecao
      * @param user
      * @return User
-     * @throws ExistUserException
+     * @throws ExistException
      */
-    public User save(final User user) throws ExistUserException {
+    public User save(final User user) throws ExistException {
         User userEntity = loadUserByUsername(user.getUsername());
-        if (userEntity != null) throw new ExistUserException();
+        if (userEntity != null) throw new ExistException();
         else {
             userEntity = new User(user.getUsername(), encoder.encode(user.getPassword()), user.getAuthorities(), user.getObservation());
             userRepository.save(userEntity);

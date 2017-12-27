@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * A classe User representa o modelo de dados de usuarios no banco monit.
+ * A classe User representa o modelo de dados de usuarios no banco oqfazer.
  * @author Thiago Fortunato
  * @version 1.0
  */

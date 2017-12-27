@@ -18,13 +18,13 @@ import javax.sql.DataSource;
 
 /**
  * A API trabalha com conexao em dois bancos de dados.
- * A classe UserDbConfig e reponsavel por vincular a entidade User ao banco de dados monit.
+ * A classe UserDbConfig e reponsavel por vincular a entidade User ao banco de dados oqfazer.
  * @author Thiago Fortunato
  * @version 1.0
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactory", basePackages = {"com.fotosensores.monit.domain.user"})
+@EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactory", basePackages = {"br.com.oqfazer.domain.user"})
 public class UserDbConfig {
 
     @Primary
@@ -38,7 +38,7 @@ public class UserDbConfig {
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(
             EntityManagerFactoryBuilder builder, @Qualifier("dataSource") DataSource dataSource) {
-        return builder.dataSource(dataSource).packages("com.fotosensores.monit.domain.user").persistenceUnit("user")
+        return builder.dataSource(dataSource).packages("br.com.oqfazer.domain.user").persistenceUnit("user")
                 .build();
     }
 

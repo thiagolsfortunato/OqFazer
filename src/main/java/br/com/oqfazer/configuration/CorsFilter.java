@@ -16,7 +16,7 @@ import java.io.IOException;
 @Component
 public class CorsFilter implements Filter {
 
-    @Value("${monit.token.header}")
+    @Value("${oqfazer.token.header}")
     private String tokenHeader;
 
     /**

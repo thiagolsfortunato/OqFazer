@@ -2,8 +2,8 @@ package br.com.oqfazer.authentication.service;
 
 import br.com.oqfazer.authentication.factory.UserFactory;
 import br.com.oqfazer.domain.user.User;
-import br.com.oqfazer.domain.user.UserNotFoundException;
 import br.com.oqfazer.domain.user.UserRepository;
+import br.com.oqfazer.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -33,8 +33,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         if (userEntity == null) {
             try {
-                throw new UserNotFoundException(String.format("No userEntity found with username '%s'.", username));
-            } catch (UserNotFoundException e) {
+                throw new NotFoundException(String.format("No userEntity found with username '%s'.", username));
+            } catch (NotFoundException e) {
                 e.printStackTrace();
             }
         } else {

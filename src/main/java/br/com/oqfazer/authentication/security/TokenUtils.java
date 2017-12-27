@@ -30,7 +30,7 @@ public class TokenUtils {
 
     private final Logger logger = Logger.getLogger(this.getClass());
 
-    @Value("${monit.token.secret}")
+    @Value("${oqfazer.token.secret}")
     private String secret;
 
     /**

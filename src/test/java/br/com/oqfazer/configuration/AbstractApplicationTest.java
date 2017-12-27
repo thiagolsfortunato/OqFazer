@@ -34,7 +34,7 @@ public abstract class AbstractApplicationTest {
 
     protected MockMvc mockMvc;
 
-    @Value("${monit.token.header}")
+    @Value("${oqfazer.token.header}")
     private String tokenHeader;
 
     /**
