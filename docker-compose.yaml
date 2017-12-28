@@ -1,12 +1,14 @@
 version: "3.0"
 services:
   db:
-    image: mysql
+    image: mysql:5.7
+    container_name: oqfazer_db
     restart: always
     environment:
-      - MYSQL_DATABASE=loja
-      - MYSQL_USER=root
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ROOT_PASSWORD=analice
+      - MYSQL_DATABASE=oqfazer
+      - MYSQL_USER=user_oqfazer
+      - MYSQL_PASSWORD=oqfazer123
     volumes:
       - mysql:/var/lib/mysql
     ports:
