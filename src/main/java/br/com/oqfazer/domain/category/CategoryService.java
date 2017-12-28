@@ -22,14 +22,8 @@ public class CategoryService {
      * @param category
      * @return
      */
-    public Category save(final Category category) throws ExistException {
-        Category categoryEntity = findByName(category.getName());
-        if (categoryEntity != null) throw new ExistException();
-        else {
-            categoryEntity = new Category(category.getName(), category.getParent());
-            repository.save(categoryEntity);
-        }
-        return categoryEntity;
+    public Category save(final Category category) {
+        return repository.save(category);
     }
 
     /**

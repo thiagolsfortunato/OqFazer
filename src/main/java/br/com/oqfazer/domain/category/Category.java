@@ -24,12 +24,11 @@ public class Category implements Serializable {
     @Column(name = "username", length = 15, nullable = true)
     private String name;
 
-    @Column(name = "parent")
-    private Category parent;
+    @Column(name = "description", length = 50, nullable = true)
+    private String description;
 
-    public Category (final String name, final Category parent) {
+    public Category (final String name, final String description) {
         this.name = name;
-        this.parent = parent;
+        this.description = description;
     }
-
 }
