@@ -25,9 +25,9 @@ public class Category implements Serializable {
     private String name;
 
     @Column(name = "parent")
-    private Long parent;
+    private Category parent;
 
-    public Category (final String name, final Long parent) {
+    public Category (final String name, final Category parent) {
         this.name = name;
         this.parent = parent;
     }

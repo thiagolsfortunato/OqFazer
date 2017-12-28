@@ -43,14 +43,14 @@ public class CategoryController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(path = "/user", method = RequestMethod.DELETE)
-    public ResponseEntity<?> delete(@RequestBody Category user) {
-        service.delete(user);
+    @RequestMapping(path = "/category", method = RequestMethod.DELETE)
+    public ResponseEntity<?> delete(@RequestBody Category category) {
+        service.delete(category);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(path = "/user", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ADMIN','USERS')")
+    @RequestMapping(path = "/category", method = RequestMethod.GET)
     public ResponseEntity<Category> findByUsername(@RequestParam("name") String name) {
         Category categoryEntity = service.findByName(name);
         if (categoryEntity != null) return new ResponseEntity(categoryEntity, HttpStatus.OK);
@@ -58,7 +58,7 @@ public class CategoryController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(path = "/category", method = RequestMethod.GET)
+    @RequestMapping(path = "/categories", method = RequestMethod.GET)
     public ResponseEntity<Category> getAll() {
         return new ResponseEntity(service.getAllCategories(), HttpStatus.OK);
     }

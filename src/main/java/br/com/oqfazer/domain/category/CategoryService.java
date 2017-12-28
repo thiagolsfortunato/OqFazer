@@ -2,9 +2,11 @@ package br.com.oqfazer.domain.category;
 
 import br.com.oqfazer.exception.ExistException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CategoryService {
 
     @Autowired
@@ -36,7 +38,7 @@ public class CategoryService {
      * @param category
      * @return
      */
-    public Category edit(Category category) {
+    public Category edit(final Category category) {
         return repository.save(category);
     }
 
@@ -64,7 +66,7 @@ public class CategoryService {
      * @param name
      * @return
      */
-    public Category findByName(String name) {
+    public Category findByName(final String name) {
         return repository.findByName(name);
     }
 
@@ -74,9 +76,8 @@ public class CategoryService {
      * @param id
      * @return
      */
-    public Category findById(Long id) {
+    public Category findById(final Long id) {
         return repository.findById(id);
     }
-
 
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="eduardo">
+        <createTable tableName="user">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="varchar(15)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(200)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="authorities" type="varchar(15)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="observation" type="varchar(500)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="eduardo">
+        <insert tableName="user" dbms="mysql">
+            <column name="username" value="admin"/>
+            <column name="password" value="$2a$08$lDnHPz7eUkSi6ao14Twuau08mzhWrL4kyZGGU5xfiGALO/Vxd5DOi"/>
+            <column name="authorities" value="ROLE_ADMIN"/>
+            <column name="observation" value="ADMIN"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

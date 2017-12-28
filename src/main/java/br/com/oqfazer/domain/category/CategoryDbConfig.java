@@ -25,28 +25,26 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"br.com.oqfazer.domain.category"})
+@EnableJpaRepositories(entityManagerFactoryRef = "categoryEntityManagerFactory", transactionManagerRef = "categoryTransactionManager", basePackages = {"br.com.oqfazer.domain.category"})
 public class CategoryDbConfig {
 
-    @Primary
-    @Bean(name = "dataSource")
+
+    @Bean(name = "categoryDataSource")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
     }
 
-    @Primary
-    @Bean(name = "entityManagerFactory")
+    @Bean(name = "categoryEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-            EntityManagerFactoryBuilder builder, @Qualifier("dataSource") DataSource dataSource) {
+            EntityManagerFactoryBuilder builder, @Qualifier("categoryDataSource") DataSource dataSource) {
         return builder.dataSource(dataSource).packages("br.com.oqfazer.domain.category").persistenceUnit("category")
                 .build();
     }
 
-    @Primary
-    @Bean(name = "transactionManager")
+    @Bean(name = "categoryTransactionManager")
     public PlatformTransactionManager transactionManager(
-            @Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory) {
+            @Qualifier("categoryEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
 }

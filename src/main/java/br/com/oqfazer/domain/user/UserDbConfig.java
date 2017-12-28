@@ -24,28 +24,28 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {"br.com.oqfazer.domain.user"})
+@EnableJpaRepositories(entityManagerFactoryRef = "userEntityManagerFactory", transactionManagerRef = "userTransactionManager", basePackages = {"br.com.oqfazer.domain.user"})
 public class UserDbConfig {
 
     @Primary
-    @Bean(name = "dataSource")
+    @Bean(name = "userDataSource")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();
     }
 
     @Primary
-    @Bean(name = "entityManagerFactory")
+    @Bean(name = "userEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-            EntityManagerFactoryBuilder builder, @Qualifier("dataSource") DataSource dataSource) {
+            EntityManagerFactoryBuilder builder, @Qualifier("userDataSource") DataSource dataSource) {
         return builder.dataSource(dataSource).packages("br.com.oqfazer.domain.user").persistenceUnit("user")
                 .build();
     }
 
     @Primary
-    @Bean(name = "transactionManager")
+    @Bean(name = "userTransactionManager")
     public PlatformTransactionManager transactionManager(
-            @Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory) {
+            @Qualifier("userEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
 }

@@ -1,0 +1,15 @@
+version: "3.0"
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      - MYSQL_DATABASE=loja
+      - MYSQL_USER=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+volumes:
+  mysql:
