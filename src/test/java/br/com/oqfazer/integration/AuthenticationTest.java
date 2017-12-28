@@ -8,14 +8,21 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.autoconfigure.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Create by Thiago Fortunato on 28/12/2017
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
+@ActiveProfiles("test")
 public class AuthenticationTest extends AbstractApplicationTest {
 
     @Before
@@ -23,6 +30,9 @@ public class AuthenticationTest extends AbstractApplicationTest {
         super.setUpContext();
     }
 
+    /** Teste para autenticação do usuário user_oqfazer
+     * @throws Exception
+     */
     @Test
     public void testLogin() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
@@ -33,6 +43,9 @@ public class AuthenticationTest extends AbstractApplicationTest {
         Assert.assertNotNull(authenticationResponse);
     }
 
+    /**Teste para falha na autenticação do usuário user_oqfazer com senha errada
+     * @throws Exception
+     */
     @Test
     public void testBadLogin() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
