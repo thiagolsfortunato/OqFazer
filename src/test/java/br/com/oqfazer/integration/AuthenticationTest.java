@@ -30,7 +30,9 @@ public class AuthenticationTest extends AbstractApplicationTest {
         super.setUpContext();
     }
 
-    /** Teste para autenticação do usuário user_oqfazer
+    /**
+     * Teste para autenticação do usuário user_oqfazer
+     *
      * @throws Exception
      */
     @Test
@@ -43,7 +45,9 @@ public class AuthenticationTest extends AbstractApplicationTest {
         Assert.assertNotNull(authenticationResponse);
     }
 
-    /**Teste para falha na autenticação do usuário user_oqfazer com senha errada
+    /**
+     * Teste para falha na autenticação do usuário user_oqfazer com senha errada
+     *
      * @throws Exception
      */
     @Test
