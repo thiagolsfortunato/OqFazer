@@ -1,1 +1,0 @@
-INSERT INTO user(username, password, authorities, observation) VALUES ('user_oqfazer', '$2a$10$E41FJtpQZwC.SItpj3Zg5.Ym7kCTfOvRoCjO4pp51O96Y2krG9iWi', 'ROLE_ADMIN', 'USER_ADMIN')
