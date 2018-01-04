@@ -33,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         if (userEntity == null) {
             try {
-                throw new NotFoundException(String.format("No userEntity found with username '%s'.", username));
+                throw new NotFoundException(String.format("No user found with username '%s'.", username));
             } catch (NotFoundException e) {
                 e.printStackTrace();
             }

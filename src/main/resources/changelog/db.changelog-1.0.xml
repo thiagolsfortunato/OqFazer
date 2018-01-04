@@ -31,7 +31,7 @@
             <column name="username" value="user_oqfazer"/>
             <column name="password" value="$2a$10$E41FJtpQZwC.SItpj3Zg5.Ym7kCTfOvRoCjO4pp51O96Y2krG9iWi"/>
             <column name="authorities" value="ROLE_ADMIN"/>
-            <column name="observation" value="ADMIN"/>
+            <column name="observation" value="USER_ADMIN"/>
         </insert>
     </changeSet>
 
