@@ -1,16 +1,21 @@
 package br.com.oqfazer.domain.category;
 
-import br.com.oqfazer.exception.ExistException;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Consumer;
 
 @Service
 public class CategoryService {
 
     @Autowired
     private CategoryRepository repository;
+
+    @Getter
+    private List<Category> categoryList = new LinkedList<>();
 
     public void setRepository(CategoryRepository repository) {
         this.repository = repository;
@@ -60,8 +65,10 @@ public class CategoryService {
      * @param name
      * @return
      */
-    public Category findByName(final String name) {
-        return repository.findByName(name);
+    public List<Category> findByName(final String name) {
+        List<Category> categoryDb = repository.findByName(name);
+        if (categoryDb.size() > 0) categoryDb.forEach(this::getSonsCategories);
+        return this.getCategoryList();
     }
 
     /**
@@ -74,4 +81,12 @@ public class CategoryService {
         return repository.findById(id);
     }
 
+    /**
+     * Metodo recursivo para buscar todas categorias filhas
+     * @param category
+     */
+    private void getSonsCategories(Category category) {
+        categoryList.add(category);
+        if (category.getSons().size() > 0) category.getSons().forEach(this::getSonsCategories);
+    }
 }

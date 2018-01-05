@@ -1,9 +1,11 @@
 package br.com.oqfazer.domain.category;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * A classe Category representa o modelo de dados de categorias no bd oqfazer.
@@ -27,14 +29,27 @@ public class Category implements Serializable {
     @Column(name = "description", length = 50)
     private String description;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
     @JoinColumn(name = "parent")
     private Category parent;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "parent")
+    private List<Category> sons;
 
-    public Category (final String name, final String description, final Category category) {
+    public Category(final String name, final String description, final Category parent) {
         this.name = name;
         this.description = description;
-        this.parent = category;
+        this.parent = parent;
     }
+
+    public Category(final Long id, final String name, final String description, final Category parent) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.parent = parent;
+    }
+
+    public Category(){}
 }

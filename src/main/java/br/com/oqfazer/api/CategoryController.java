@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * A classe CategoryController e reponsavel por disponiblizar os servicos de category
  *
@@ -46,16 +48,11 @@ public class CategoryController {
 
     @PreAuthorize("hasAnyRole('ADMIN','USERS')")
     @RequestMapping(path = "/category", method = RequestMethod.GET)
-    public ResponseEntity<Category> findByUsername(@RequestParam("name") String name) {
-        Category categoryEntity = service.findByName(name);
-        if (categoryEntity != null) return new ResponseEntity<>(categoryEntity, HttpStatus.OK);
-        else return new ResponseEntity<>(categoryEntity, HttpStatus.NOT_FOUND);
+    public ResponseEntity<Category> findByName(@RequestParam("name") String name) {
+        return new ResponseEntity(service.findByName(name), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','USERS')")
     @RequestMapping(path = "/categories", method = RequestMethod.GET)
-    public ResponseEntity<Category> getAll() {
-        return new ResponseEntity(service.getAllCategories(), HttpStatus.OK);
-    }
-
+    public ResponseEntity<Category> getAll() { return new ResponseEntity(service.getAllCategories(), HttpStatus.OK); }
 }
