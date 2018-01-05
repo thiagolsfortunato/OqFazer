@@ -101,7 +101,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "*").permitAll()
                 .antMatchers("/api/**").permitAll()
-                .antMatchers("/chat/**").permitAll()
+                .antMatchers("/oqfazer/**").permitAll()
                 .anyRequest().authenticated();
 
         httpSecurity

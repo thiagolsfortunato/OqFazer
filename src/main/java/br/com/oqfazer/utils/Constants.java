@@ -11,7 +11,7 @@ public enum Constants {
 
     DESTINATION("/topic"),
     DESTINATIONS_PREFIX("/user"),
-    CHAT_CONECTION("/chat"),
+    CHAT_CONECTION("/oqfazer"),
     JOIN("/join"),
     LEAVE("/leave"),
     HEARTBEAT("/heartbeat");
