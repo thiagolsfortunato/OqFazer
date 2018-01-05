@@ -36,7 +36,7 @@ public class SocketTest {
 
     private SockJsClient sockJsClient;
 
-    private String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX29xZmF6ZXIiLCJjcmVhdGVkIjoxNTE1MTEwOTYyMTgzfQ.r4Rds6ASQC0bEeFkDyxlqTIkQC41c7TJRp_PBaUIWk87OunfM7x0FzfKFp5tY_--QB0CgKwrwKEeuU2XvKmRzg";
+    private String token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyX29xZmF6ZXIiLCJjcmVhdGVkIjoxNTE1MTU0MTQzNTcxfQ.lI84ussivcAJ3AcyHScqWJb42cSXxylyuN5hhk_c6iimTWelgZcphBAH8xkV_cbzsvlUnbESoyTPVYI02iNflw";
 
     private WebSocketStompClient stompClient;
 

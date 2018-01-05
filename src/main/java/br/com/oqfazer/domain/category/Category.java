@@ -21,14 +21,20 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", length = 15, nullable = true)
+    @Column(name = "name", length = 20)
     private String name;
 
-    @Column(name = "description", length = 50, nullable = true)
+    @Column(name = "description", length = 50)
     private String description;
 
-    public Category (final String name, final String description) {
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @JoinColumn(name = "parent")
+    private Category parent;
+
+
+    public Category (final String name, final String description, final Category category) {
         this.name = name;
         this.description = description;
+        this.parent = category;
     }
 }
