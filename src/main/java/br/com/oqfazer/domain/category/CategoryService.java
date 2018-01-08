@@ -14,7 +14,6 @@ public class CategoryService {
     @Autowired
     private CategoryRepository repository;
 
-    @Getter
     private List<Category> categoryList = new LinkedList<>();
 
     public void setRepository(CategoryRepository repository) {
@@ -68,7 +67,7 @@ public class CategoryService {
     public List<Category> findByName(final String name) {
         List<Category> categoryDb = repository.findByName(name);
         if (categoryDb.size() > 0) categoryDb.forEach(this::getSonsCategories);
-        return this.getCategoryList();
+        return categoryList;
     }
 
     /**

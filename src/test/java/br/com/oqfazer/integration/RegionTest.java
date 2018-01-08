@@ -3,6 +3,7 @@ package br.com.oqfazer.integration;
 import br.com.oqfazer.authentication.request.AuthenticationRequest;
 import br.com.oqfazer.authentication.response.AuthenticationResponse;
 import br.com.oqfazer.configuration.AbstractApplicationTest;
+import br.com.oqfazer.domain.city.City;
 import br.com.oqfazer.domain.region.Region;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
@@ -14,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.transaction.Transactional;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

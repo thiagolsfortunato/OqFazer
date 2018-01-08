@@ -31,7 +31,6 @@ public class UserController {
             User userEntity = service.save(user);
             return new ResponseEntity(userEntity, HttpStatus.CREATED);
         } catch (ExistException e) {
-            e.printStackTrace();
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
     }

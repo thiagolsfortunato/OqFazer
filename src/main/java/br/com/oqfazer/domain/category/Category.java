@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class Category implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "parent")
-    private List<Category> sons;
+    private List<Category> sons = new LinkedList<>();
 
     public Category(final String name, final String description, final Category parent) {
         this.name = name;

@@ -1,6 +1,5 @@
 package br.com.oqfazer.domain.region;
 
-import br.com.oqfazer.domain.region.Region;
 import br.com.oqfazer.exception.ExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,7 +59,8 @@ public class RegionService {
      * @return
      */
     public Region findByName(final String name) {
-        return repository.findByName(name);
+        Region regionEntity = repository.findByName(name);
+        return regionEntity;
     }
 
     /**

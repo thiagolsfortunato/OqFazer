@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table
+@Table(name = "region")
 public class Region {
 
     @Id
@@ -20,7 +20,6 @@ public class Region {
     @Column(name = "name", length = 15)
     private String name;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "region", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<City> cities;
 
