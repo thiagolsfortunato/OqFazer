@@ -1,6 +1,5 @@
 package br.com.oqfazer.domain.city;
 
-import br.com.oqfazer.domain.category.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,12 +36,12 @@ public class CityService {
     }
 
     /**
-     * O metodo e reponsavel por deletar category
+     * O metodo e reponsavel por deletar city
      *
-     * @param category
+     * @param city
      */
-    public void delete(final City category) {
-        repository.delete(category);
+    public void delete(final City city) {
+        repository.delete(city);
     }
 
     /**

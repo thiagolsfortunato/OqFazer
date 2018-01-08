@@ -20,8 +20,20 @@ public class City {
     @Column(name = "name", length = 70)
     private String name;
 
-
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "region_id")
+    @JoinColumn(name = "region_id", nullable = false)
     private Region region;
+
+    public City() {}
+
+    public City(String name, Region region) {
+        this.name = name;
+        this.region = region;
+    }
+
+    public City(Long id, String name, Region region) {
+        this.id = id;
+        this.name = name;
+        this.region = region;
+    }
 }
