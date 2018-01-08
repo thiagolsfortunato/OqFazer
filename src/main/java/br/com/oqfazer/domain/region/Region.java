@@ -21,6 +21,20 @@ public class Region {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "region", fetch = FetchType.EAGER, cascade = CascadeType.ALL )
+    @OneToMany(mappedBy = "region", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<City> cities;
+
+    public Region() {}
+
+    public Region(String name, List<City> cities) {
+        this.name = name;
+        this.cities = cities;
+    }
+
+    public Region(Long id, String name, List<City> cities) {
+        this.id = id;
+        this.name = name;
+        this.cities = cities;
+    }
+
 }
