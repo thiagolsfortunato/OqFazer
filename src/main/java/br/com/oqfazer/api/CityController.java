@@ -2,6 +2,7 @@ package br.com.oqfazer.api;
 
 import br.com.oqfazer.domain.city.City;
 import br.com.oqfazer.domain.city.CityService;
+import br.com.oqfazer.exception.ExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,8 +20,12 @@ public class CityController {
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path = "/city", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<City> save(@RequestBody City city) {
-        City cityEntity = service.save(city);
-        return new ResponseEntity(cityEntity, HttpStatus.CREATED);
+        try {
+            City cityEntity = service.save(city);
+            return new ResponseEntity(cityEntity, HttpStatus.CREATED);
+        } catch (ExistException e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")

@@ -55,10 +55,10 @@ public class CityTest extends AbstractApplicationTest {
          * Test Insert
          */
         Region region = new Region("Vale do Paraiba", null);
+        Region regionEntity = service.save(region);
 
-        City city = new City("São José dos Campos", region);
+        City city = new City("São José dos Campos", regionEntity);
         String jsonInString = mapper.writeValueAsString(city);
-        System.out.println(jsonInString);
         int status = super.mockMvcPerformAuthenticatedPostStatus("/api/city", jsonInString, MediaType.APPLICATION_JSON_VALUE, status().isCreated(), token);
         Assert.assertEquals(201, status);
 

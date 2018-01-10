@@ -31,7 +31,7 @@ public class Category implements Serializable {
     private String description;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToOne(targetEntity = Category.class)
     @JoinColumn(name = "parent")
     private Category parent;
 

@@ -20,7 +20,7 @@ public class City {
     @Column(name = "name", length = 70)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Region.class)
     @JoinColumn(name = "region_id", nullable = false)
     private Region region;
 

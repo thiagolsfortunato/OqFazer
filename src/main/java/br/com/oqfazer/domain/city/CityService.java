@@ -1,5 +1,6 @@
 package br.com.oqfazer.domain.city;
 
+import br.com.oqfazer.exception.ExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,10 @@ public class CityService {
      * @param city
      * @return
      */
-    public City save(final City city) {
-        return repository.save(city);
+    public City save(final City city) throws ExistException {
+        City cityEntity = this.findByName(city.getName());
+        if (cityEntity != null) throw new ExistException();
+        else return repository.save(city);
     }
 
     /**

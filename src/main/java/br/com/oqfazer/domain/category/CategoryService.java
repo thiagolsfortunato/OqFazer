@@ -1,5 +1,6 @@
 package br.com.oqfazer.domain.category;
 
+import br.com.oqfazer.exception.ExistException;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepository repository;
 
-    private List<Category> categoryList = new LinkedList<>();
+    private Category category = new Category();
 
     public void setRepository(CategoryRepository repository) {
         this.repository = repository;
@@ -26,8 +27,10 @@ public class CategoryService {
      * @param category
      * @return
      */
-    public Category save(final Category category) {
-        return repository.save(category);
+    public Category save(final Category category) throws ExistException {
+        Category categoryEntity = this.findByName(category.getName());
+        if (categoryEntity != null) throw new ExistException();
+        else return repository.save(category);
     }
 
     /**
@@ -64,10 +67,11 @@ public class CategoryService {
      * @param name
      * @return
      */
-    public List<Category> findByName(final String name) {
-        List<Category> categoryDb = repository.findByName(name);
-        if (categoryDb.size() > 0) categoryDb.forEach(this::getSonsCategories);
-        return categoryList;
+    public Category findByName(final String name) {
+        Category categoryEntity = repository.findByName(name);
+        //TODO: verify called recursively
+        //if (categoryEntity != null) getSonsCategories(categoryEntity);
+        return categoryEntity;
     }
 
     /**
@@ -85,7 +89,7 @@ public class CategoryService {
      * @param category
      */
     private void getSonsCategories(Category category) {
-        categoryList.add(category);
+        System.out.println(category);
         if (category.getSons().size() > 0) category.getSons().forEach(this::getSonsCategories);
     }
 }

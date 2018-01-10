@@ -46,14 +46,19 @@ public class User implements Serializable {
         super();
     }
 
-    public User(Long id, String username, String password, String authorities, String observation, List<Event> owner, List<Event> participation) {
+    public User(String username, String password, String authorities, String observation) {
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
+        this.observation = observation;
+    }
+
+    public User(Long id, String username, String password, String authorities, String observation) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
-        this.observation =observation;
-        this.owner = owner;
-        this.participation = participation;
+        this.observation = observation;
     }
 
     public User(String username, String password, String authorities, String observation, List<Event> owner, List<Event> participation) {
@@ -61,6 +66,16 @@ public class User implements Serializable {
         this.password = password;
         this.authorities = authorities;
         this.observation = observation;
+        this.owner = owner;
+        this.participation = participation;
+    }
+
+    public User(Long id, String username, String password, String authorities, String observation, List<Event> owner, List<Event> participation) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
+        this.observation =observation;
         this.owner = owner;
         this.participation = participation;
     }

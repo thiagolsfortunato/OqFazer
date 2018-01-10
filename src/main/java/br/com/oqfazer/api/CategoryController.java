@@ -2,6 +2,7 @@ package br.com.oqfazer.api;
 
 import br.com.oqfazer.domain.category.Category;
 import br.com.oqfazer.domain.category.CategoryService;
+import br.com.oqfazer.exception.ExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -28,8 +29,13 @@ public class CategoryController {
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path = "/category", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Category> save(@RequestBody Category category) {
-        Category categoryEntity = service.save(category);
-        return new ResponseEntity(categoryEntity, HttpStatus.CREATED);
+        Category categoryEntity = null;
+        try {
+            categoryEntity = service.save(category);
+            return new ResponseEntity(categoryEntity, HttpStatus.CREATED);
+        } catch (ExistException e) {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
