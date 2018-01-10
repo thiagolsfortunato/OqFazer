@@ -20,7 +20,7 @@ public class Region {
     @Column(name = "name", length = 15)
     private String name;
 
-    @OneToMany(mappedBy = "region", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "region", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<City> cities;
 
     public Region() {}

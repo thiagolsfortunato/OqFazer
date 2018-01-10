@@ -1,6 +1,7 @@
 package br.com.oqfazer.domain.user;
 
 import br.com.oqfazer.domain.event.Event;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -36,10 +37,10 @@ public class User implements Serializable {
     @Column(name = "observation")
     private String observation;
 
-    @OneToMany(mappedBy = "owner")
-    private List<Event> owner;
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Event> events;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy ="participants")
+    @ManyToMany(mappedBy ="participants", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Event> participation;
 
     public User() {
@@ -61,22 +62,22 @@ public class User implements Serializable {
         this.observation = observation;
     }
 
-    public User(String username, String password, String authorities, String observation, List<Event> owner, List<Event> participation) {
+    public User(String username, String password, String authorities, String observation, List<Event> events, List<Event> participation) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.observation = observation;
-        this.owner = owner;
+        this.events = events;
         this.participation = participation;
     }
 
-    public User(Long id, String username, String password, String authorities, String observation, List<Event> owner, List<Event> participation) {
+    public User(Long id, String username, String password, String authorities, String observation, List<Event> events, List<Event> participation) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.observation =observation;
-        this.owner = owner;
+        this.events = events;
         this.participation = participation;
     }
 

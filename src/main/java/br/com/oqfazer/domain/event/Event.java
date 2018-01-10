@@ -3,16 +3,18 @@ package br.com.oqfazer.domain.event;
 import br.com.oqfazer.domain.category.Category;
 import br.com.oqfazer.domain.region.Region;
 import br.com.oqfazer.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "event")
-public class Event {
+public class Event implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -35,23 +37,46 @@ public class Event {
     @Column(name = "imageUrl", length = 70)
     private String imageUrl;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Category.class)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Region.class)
     @JoinColumn(name = "region_id", nullable = false)
     private Region region;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "owner", nullable = false)
     private User owner;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "participants")
     private List<User> participants;
 
     private Event() {}
+
+    public Event(String name, String description, Calendar event_date, String local, String imageUrl, Category category, Region region, User owner) {
+        this.name = name;
+        this.description = description;
+        this.event_date = event_date;
+        this.local = local;
+        this.imageUrl = imageUrl;
+        this.category = category;
+        this.region = region;
+        this.owner = owner;
+    }
+
+    public Event(Long id, String name, String description, Calendar event_date, String local, String imageUrl, Category category, Region region, User owner) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.event_date = event_date;
+        this.local = local;
+        this.imageUrl = imageUrl;
+        this.category = category;
+        this.region = region;
+        this.owner = owner;
+    }
 
     public Event(String name, String description, Calendar event_date, String local, String imageUrl, Region region, User owner, List<User> participants) {
         this.name = name;
