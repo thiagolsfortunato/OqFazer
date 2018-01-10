@@ -62,8 +62,8 @@ public class CategoryTest extends AbstractApplicationTest {
          * Test Search By Name
          */
         String result = super.mockMvcPerformGetRequestParam("/api/category", "name", "Show");
-        List<Category> categoryList = mapper.readValue(result, mapper.getTypeFactory().constructCollectionType(List.class, Category.class));
-        Assert.assertNotNull(categoryList);
+        Category categoryEntity = mapper.readValue(result, Category.class);
+        Assert.assertNotNull(categoryEntity);
 
         /**
          * Test Edit
