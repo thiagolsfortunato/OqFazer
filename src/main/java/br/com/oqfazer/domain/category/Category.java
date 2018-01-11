@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * A classe Category representa o modelo de dados de categorias no bd oqfazer.
+ *
  * @author Thiago Fortunato
  * @version 1.0
  */
@@ -35,7 +36,6 @@ public class Category implements Serializable {
     @JoinColumn(name = "parent")
     private Category parent;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "parent")
     private List<Category> sons = new LinkedList<>();
 

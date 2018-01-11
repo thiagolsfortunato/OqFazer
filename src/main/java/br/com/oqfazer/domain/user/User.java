@@ -1,8 +1,9 @@
 package br.com.oqfazer.domain.user;
 
 import br.com.oqfazer.domain.event.Event;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -37,7 +38,8 @@ public class User implements Serializable {
     @Column(name = "observation")
     private String observation;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Event> events;
 
     @ManyToMany(mappedBy ="participants", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

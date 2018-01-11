@@ -1,8 +1,9 @@
 package br.com.oqfazer.domain.region;
 
 import br.com.oqfazer.domain.city.City;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,10 +21,12 @@ public class Region {
     @Column(name = "name", length = 15)
     private String name;
 
-    @OneToMany(mappedBy = "region", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
     private List<City> cities;
 
-    public Region() {}
+    public Region() {
+    }
 
     public Region(String name, List<City> cities) {
         this.name = name;

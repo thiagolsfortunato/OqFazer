@@ -1,13 +1,10 @@
 package br.com.oqfazer.domain.category;
 
 import br.com.oqfazer.exception.ExistException;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Consumer;
 
 @Service
 public class CategoryService {
