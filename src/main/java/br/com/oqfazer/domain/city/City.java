@@ -20,7 +20,6 @@ public class City {
     @Column(name = "name", length = 70)
     private String name;
 
-    @JsonIgnore
     @ManyToOne(targetEntity = Region.class)
     @JoinColumn(name = "region_id", nullable = false)
     private Region region;

@@ -38,10 +38,6 @@ public class User implements Serializable {
     @Column(name = "observation")
     private String observation;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    private List<Event> events;
-
     @ManyToMany(mappedBy ="participants", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Event> participation;
 
@@ -69,7 +65,7 @@ public class User implements Serializable {
         this.password = password;
         this.authorities = authorities;
         this.observation = observation;
-        this.events = events;
+        //this.events = events;
         this.participation = participation;
     }
 
@@ -79,7 +75,7 @@ public class User implements Serializable {
         this.password = password;
         this.authorities = authorities;
         this.observation =observation;
-        this.events = events;
+       // this.events = events;
         this.participation = participation;
     }
 

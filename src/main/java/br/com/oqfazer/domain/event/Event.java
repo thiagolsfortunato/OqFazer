@@ -3,13 +3,15 @@ package br.com.oqfazer.domain.event;
 import br.com.oqfazer.domain.category.Category;
 import br.com.oqfazer.domain.region.Region;
 import br.com.oqfazer.domain.user.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -49,9 +51,9 @@ public class Event implements Serializable {
     @JoinColumn(name = "owner", nullable = false)
     private User owner;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "participants")
-    private List<User> participants;
+    private Set<User> participants;
 
     private Event() {}
 
@@ -78,7 +80,7 @@ public class Event implements Serializable {
         this.owner = owner;
     }
 
-    public Event(String name, String description, Calendar event_date, String local, String imageUrl, Region region, User owner, List<User> participants) {
+    public Event(String name, String description, Calendar event_date, String local, String imageUrl, Region region, User owner, Set<User> participants) {
         this.name = name;
         this.description = description;
         this.event_date = event_date;
@@ -89,7 +91,7 @@ public class Event implements Serializable {
         this.participants = participants;
     }
 
-    public Event(Long id, String name, String description, Calendar event_date, String local, String imageUrl, Region region, User owner, List<User> participants) {
+    public Event(Long id, String name, String description, Calendar event_date, String local, String imageUrl, Region region, User owner, Set<User> participants) {
         this.id = id;
         this.name = name;
         this.description = description;

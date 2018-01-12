@@ -4,6 +4,8 @@ import br.com.oqfazer.exception.ExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -12,7 +14,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepository repository;
 
-    private Category category = new Category();
+    private List<Category> categories = new LinkedList<>();
 
     public void setRepository(CategoryRepository repository) {
         this.repository = repository;
@@ -46,7 +48,8 @@ public class CategoryService {
      * @param category
      */
     public void delete(final Category category) {
-        repository.delete(category);
+        Category categoryEntity = findById(category.getId());
+        repository.delete(categoryEntity);
     }
 
     /**
@@ -66,8 +69,6 @@ public class CategoryService {
      */
     public Category findByName(final String name) {
         Category categoryEntity = repository.findByName(name);
-        //TODO: verify called recursively
-        //if (categoryEntity != null) getSonsCategories(categoryEntity);
         return categoryEntity;
     }
 
@@ -78,15 +79,7 @@ public class CategoryService {
      * @return
      */
     public Category findById(final Long id) {
-        return repository.findById(id);
-    }
-
-    /**
-     * Metodo recursivo para buscar todas categorias filhas
-     * @param category
-     */
-    private void getSonsCategories(Category category) {
-        System.out.println(category);
-        if (category.getSons().size() > 0) category.getSons().forEach(this::getSonsCategories);
+        Category categoryEntity = repository.findById(id);
+        return categoryEntity;
     }
 }

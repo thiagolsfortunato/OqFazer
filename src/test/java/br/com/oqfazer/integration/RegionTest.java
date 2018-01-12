@@ -63,15 +63,15 @@ public class RegionTest extends AbstractApplicationTest {
         /**
          * Test Edit
          */
-        region.setName("Litoral");
-        jsonInString = mapper.writeValueAsString(region);
+        regionEntity.setName("Litoral");
+        jsonInString = mapper.writeValueAsString(regionEntity);
         status = super.mockMvcPerformAuthenticatedPutResult("/api/region", jsonInString, MediaType.APPLICATION_JSON_VALUE, status().isOk(), token);
         Assert.assertEquals(200, status);
 
         /**
          * Test Delete
          */
-        jsonInString = mapper.writeValueAsString(region);
+        jsonInString = mapper.writeValueAsString(regionEntity);
         status = super.mockMvcPerformAuthenticatedDeleteResult("/api/region", jsonInString, MediaType.APPLICATION_JSON_VALUE, status().isOk(), token);
         Assert.assertEquals(200, status);
 

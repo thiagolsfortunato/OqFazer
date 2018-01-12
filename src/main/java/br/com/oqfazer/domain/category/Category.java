@@ -5,8 +5,10 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A classe Category representa o modelo de dados de categorias no bd oqfazer.
@@ -31,12 +33,12 @@ public class Category implements Serializable {
     @Column(name = "description", length = 50)
     private String description;
 
-    @JsonIgnore
     @ManyToOne(targetEntity = Category.class)
     @JoinColumn(name = "parent")
     private Category parent;
 
-    @OneToMany(mappedBy = "parent")
+    @JsonIgnore
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE)
     private List<Category> sons = new LinkedList<>();
 
     public Category(final String name, final String description, final Category parent) {

@@ -44,7 +44,8 @@ public class CityService {
      * @param city
      */
     public void delete(final City city) {
-        repository.delete(city);
+        City cityEntity = findById(city.getId());
+        repository.delete(cityEntity);
     }
 
     /**

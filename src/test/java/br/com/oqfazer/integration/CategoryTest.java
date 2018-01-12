@@ -51,40 +51,33 @@ public class CategoryTest extends AbstractApplicationTest {
         Assert.assertEquals(201, status);
 
         /**
+         * Test Search By Name
+         */
+        String result = super.mockMvcPerformGetRequestParam("/api/category", "name", "Show");
+        Category categoryParent = mapper.readValue(result, Category.class);
+        Assert.assertNotNull(categoryParent);
+
+        /**
          * Test Insert with parent
          */
-        Category son = new Category("Rock", "child show", category);
+        Category son = new Category("Rock", "child show", categoryParent);
         String jsonInString1 = mapper.writeValueAsString(son);
         int status1 = super.mockMvcPerformAuthenticatedPostStatus("/api/category", jsonInString1, MediaType.APPLICATION_JSON_VALUE, status().isCreated(), token);
         Assert.assertEquals(201, status1);
 
         /**
-         * Test Search By Name
-         */
-        String result = super.mockMvcPerformGetRequestParam("/api/category", "name", "Show");
-        Category categoryEntity = mapper.readValue(result, Category.class);
-        Assert.assertNotNull(categoryEntity);
-
-        /**
          * Test Edit
          */
-        category.setName("Party");
-        jsonInString = mapper.writeValueAsString(category);
+        categoryParent.setName("Party");
+        jsonInString = mapper.writeValueAsString(categoryParent);
         status = super.mockMvcPerformAuthenticatedPutResult("/api/category", jsonInString, MediaType.APPLICATION_JSON_VALUE, status().isOk(), token);
         Assert.assertEquals(200, status);
 
         /**
          * Test Delete
          */
-        jsonInString = mapper.writeValueAsString(category);
+        jsonInString = mapper.writeValueAsString(categoryParent);
         status = super.mockMvcPerformAuthenticatedDeleteResult("/api/category", jsonInString, MediaType.APPLICATION_JSON_VALUE, status().isOk(), token);
-        Assert.assertEquals(200, status);
-
-        /**
-         * Test Delete with Parent
-         */
-        jsonInString1 = mapper.writeValueAsString(son);
-        status = super.mockMvcPerformAuthenticatedDeleteResult("/api/category", jsonInString1, MediaType.APPLICATION_JSON_VALUE, status().isOk(), token);
         Assert.assertEquals(200, status);
 
     }

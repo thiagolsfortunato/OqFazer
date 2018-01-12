@@ -54,10 +54,9 @@ public class CityTest extends AbstractApplicationTest {
         /**
          * Test Insert
          */
-        Region region = new Region("Vale do Paraiba", null);
-        Region regionEntity = service.save(region);
+        Region regionEntity = service.save(new Region("Litoral", null));
 
-        City city = new City("São José dos Campos", regionEntity);
+        City city = new City("Ubatuba", regionEntity);
         String jsonInString = mapper.writeValueAsString(city);
         int status = super.mockMvcPerformAuthenticatedPostStatus("/api/city", jsonInString, MediaType.APPLICATION_JSON_VALUE, status().isCreated(), token);
         Assert.assertEquals(201, status);
@@ -65,22 +64,22 @@ public class CityTest extends AbstractApplicationTest {
         /**
          * Test Search By Name
          */
-        String result = super.mockMvcPerformGetRequestParam("/api/city", "name", "São José dos Campos");
+        String result = super.mockMvcPerformGetRequestParam("/api/city", "name", "Ubatuba");
         City cityEntity = mapper.readValue(result, City.class);
         Assert.assertNotNull(cityEntity);
 
         /**
          * Test Edit
          */
-        city.setName("Jacareí");
-        jsonInString = mapper.writeValueAsString(city);
+        cityEntity.setName("Ilha Bela");
+        jsonInString = mapper.writeValueAsString(cityEntity);
         status = super.mockMvcPerformAuthenticatedPutResult("/api/city", jsonInString, MediaType.APPLICATION_JSON_VALUE, status().isOk(), token);
         Assert.assertEquals(200, status);
 
         /**
          * Test Delete
          */
-        jsonInString = mapper.writeValueAsString(city);
+        jsonInString = mapper.writeValueAsString(cityEntity);
         status = super.mockMvcPerformAuthenticatedDeleteResult("/api/city", jsonInString, MediaType.APPLICATION_JSON_VALUE, status().isOk(), token);
         Assert.assertEquals(200, status);
 
