@@ -13,5 +13,16 @@ services:
       - mysql:/var/lib/mysql
     ports:
       - 3306:3306
+  nginx:
+    image: nginx:1.12-alpine
+    container_name: oqfazer_nginx
+    restart: always
+    volumes:
+      - nginx:/var/log/nginx
+      - ../OqFazer-UI/app:/var/lib/
+      - ./nginx_oqfazer.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
 volumes:
   mysql:
+  nginx:
