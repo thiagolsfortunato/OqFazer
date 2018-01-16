@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * A classe UserController e reponsavel por disponiblizar os servicos de user
  *
@@ -50,11 +52,19 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(path = "/user", method = RequestMethod.GET)
+    @RequestMapping(path = "/username", method = RequestMethod.GET)
     public ResponseEntity<User> seachByUsername(@RequestParam("username") String username) {
         User userEntity = service.loadUserByUsername(username);
         if (userEntity != null) return new ResponseEntity(userEntity, HttpStatus.OK);
         else return new ResponseEntity(userEntity, HttpStatus.NOT_FOUND);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping(path = "/user", method = RequestMethod.GET)
+    public ResponseEntity<User> seachByName(@RequestParam("name") String name) {
+        List<User> userList= service.loadUsersByName(name);
+        if (userList != null) return new ResponseEntity(userList, HttpStatus.OK);
+        else return new ResponseEntity(userList, HttpStatus.NOT_FOUND);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

@@ -36,7 +36,7 @@ public class UserService {
         User userEntity = loadUserByUsername(user.getUsername());
         if (userEntity != null) throw new ExistException();
         else {
-            userEntity = new User(user.getUsername(), encoder.encode(user.getPassword()), user.getAuthorities(), user.getObservation());
+            userEntity = new User(user.getName(), user.getUsername(), encoder.encode(user.getPassword()), user.getAuthorities(), user.getObservation());
             userRepository.save(userEntity);
         }
         return userEntity;
@@ -54,7 +54,7 @@ public class UserService {
             user.setPassword(userEntity.getPassword());
             return userRepository.save(user);
         }else {
-            return userRepository.save(new User(user.getId(), user.getUsername(), encoder.encode(user.getPassword()), user.getAuthorities(), user.getObservation()));
+            return userRepository.save(new User(user.getId(), user.getName(), user.getUsername(), encoder.encode(user.getPassword()), user.getAuthorities(), user.getObservation()));
         }
     }
 
@@ -67,13 +67,23 @@ public class UserService {
     }
 
     /**
-     * O metodo e reponsavel por retornar um usuario realizando a busca por nome
+     * O metodo e reponsavel por retornar um usuario realizando a busca por username
      * @param username
      * @return User
      */
     public User loadUserByUsername(String username) {
         User userEntity = this.userRepository.findByUsername(username);
         return userEntity;
+    }
+
+    /**
+     * O metodo e reponsavel por retornar um usuario realizando a busca por nome
+     * @param name
+     * @return User
+     */
+    public List<User> loadUsersByName(String name) {
+        List<User> userList = this.userRepository.findByName(name);
+        return userList;
     }
 
     /**

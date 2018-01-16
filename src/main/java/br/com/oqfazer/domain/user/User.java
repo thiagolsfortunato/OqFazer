@@ -26,7 +26,10 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", length = 15, nullable = true)
+    @Column(name = "name", length = 30, nullable = true)
+    private String name;
+
+    @Column(name = "username", length = 20, nullable = true)
     private String username;
 
     @Column(name = "password", length = 200, nullable = true)
@@ -45,37 +48,39 @@ public class User implements Serializable {
         super();
     }
 
-    public User(String username, String password, String authorities, String observation) {
+    public User(String name, String username, String password, String authorities, String observation) {
+        this.name = name;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.observation = observation;
     }
 
-    public User(Long id, String username, String password, String authorities, String observation) {
+    public User(Long id, String name, String username, String password, String authorities, String observation) {
         this.id = id;
+        this.name = name;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.observation = observation;
     }
 
-    public User(String username, String password, String authorities, String observation, List<Event> events, List<Event> participation) {
+    public User(String name, String username, String password, String authorities, String observation, List<Event> participation) {
+        this.name = name;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.observation = observation;
-        //this.events = events;
         this.participation = participation;
     }
 
-    public User(Long id, String username, String password, String authorities, String observation, List<Event> events, List<Event> participation) {
+    public User(Long id, String name, String username, String password, String authorities, String observation, List<Event> participation) {
         this.id = id;
+        this.name = name;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
         this.observation =observation;
-       // this.events = events;
         this.participation = participation;
     }
 

@@ -49,7 +49,7 @@ public class UserTest extends AbstractApplicationTest {
         /**
          * Test Insert
          */
-        User user = new User("eduardo", "eduardo123", "ROLE_ADMIN", "TEST_INSERT");
+        User user = new User("eduardo", "eduardo", "eduardo123", "ROLE_ADMIN", "TEST_INSERT");
         String jsonInString = mapper.writeValueAsString(user);
         int status = super.mockMvcPerformAuthenticatedPostStatus("/api/user", jsonInString, MediaType.APPLICATION_JSON_VALUE, status().isCreated(), token);
         Assert.assertEquals(201, status);
