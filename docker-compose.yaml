@@ -19,7 +19,7 @@ services:
     restart: always
     volumes:
       - nginx:/var/log/nginx
-      - ../OqFazer-UI/app:/var/lib/
+      - /opt/OqFazer-UI:/OqFazer-UI:rw
       - ./nginx_oqfazer.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80

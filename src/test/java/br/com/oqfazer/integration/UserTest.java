@@ -55,10 +55,17 @@ public class UserTest extends AbstractApplicationTest {
         Assert.assertEquals(201, status);
 
         /**
+         * Test Search By Name
+         */
+        String resultName = super.mockMvcPerformGetRequestParam("/api/user", "name", "eduardo");
+        List<User> userList = mapper.readValue(resultName, mapper.getTypeFactory().constructCollectionType(List.class, User.class));
+        Assert.assertTrue(userList.size() > 0);
+
+        /**
          * Test Search By Username
          */
-        String result = super.mockMvcPerformGetRequestParam("/api/user", "username", "eduardo");
-        user = mapper.readValue(result, User.class);
+        String resultUsername = super.mockMvcPerformGetRequestParam("/api/username", "username", "eduardo");
+        user = mapper.readValue(resultUsername, User.class);
         Assert.assertNotNull(user);
 
         /**

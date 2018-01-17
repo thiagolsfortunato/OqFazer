@@ -9,7 +9,6 @@
 - Spring-boot-starter-web:1.5.7.RELEASE
 - Spring-boot-starter-test:1.5.7.RELEASE
 - Spring-boot-starter-data-jpa:1.5.7.RELEASE
-- Spring-boot-starter-websocket:1.5.7.RELEASE
 - Spring-boot-starter-thymeleaf:1.5.7.RELEASE
 - Jsonwebtoken:jjwt:0.4
 - Jackson-databind:2.8.9
