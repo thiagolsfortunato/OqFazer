@@ -36,7 +36,7 @@ public class UserService {
         User userEntity = loadUserByUsername(user.getUsername());
         if (userEntity != null) throw new ExistException();
         else {
-            userEntity = new User(user.getName(), user.getUsername(), encoder.encode(user.getPassword()), user.getAuthorities(), user.getObservation());
+            userEntity = new User(user.getName(), user.getUsername(), encoder.encode(user.getPassword()), user.getEmail(), user.getAuthorities(), user.getPhone());
             userRepository.save(userEntity);
         }
         return userEntity;
@@ -54,7 +54,7 @@ public class UserService {
             user.setPassword(userEntity.getPassword());
             return userRepository.save(user);
         }else {
-            return userRepository.save(new User(user.getId(), user.getName(), user.getUsername(), encoder.encode(user.getPassword()), user.getAuthorities(), user.getObservation()));
+            return userRepository.save(new User(user.getId(), user.getName(), user.getUsername(), encoder.encode(user.getPassword()), user.getEmail(), user.getAuthorities(), user.getPhone()));
         }
     }
 

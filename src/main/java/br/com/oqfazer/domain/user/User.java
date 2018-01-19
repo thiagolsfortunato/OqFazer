@@ -35,11 +35,14 @@ public class User implements Serializable {
     @Column(name = "password", length = 200, nullable = true)
     private String password;
 
+    @Column(name = "email", length = 60)
+    private String email;
+
+    @Column(name = "phone")
+    private String phone;
+
     @Column(name = "authorities")
     private String authorities;
-
-    @Column(name = "observation")
-    private String observation;
 
     @ManyToMany(mappedBy ="participants", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Event> participation;
@@ -48,39 +51,43 @@ public class User implements Serializable {
         super();
     }
 
-    public User(String name, String username, String password, String authorities, String observation) {
+    public User(String name, String username, String password, String email, String phone, String authorities) {
         this.name = name;
         this.username = username;
         this.password = password;
+        this.email = email;
         this.authorities = authorities;
-        this.observation = observation;
+        this.phone = phone;
     }
 
-    public User(Long id, String name, String username, String password, String authorities, String observation) {
+    public User(Long id, String name, String username, String password, String email, String phone, String authorities) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
+        this.email = email;
         this.authorities = authorities;
-        this.observation = observation;
+        this.phone = phone;
     }
 
-    public User(String name, String username, String password, String authorities, String observation, List<Event> participation) {
+    public User(String name, String username, String password, String email, String phone, String authorities, List<Event> participation) {
         this.name = name;
         this.username = username;
         this.password = password;
+        this.email = email;
         this.authorities = authorities;
-        this.observation = observation;
+        this.phone = phone;
         this.participation = participation;
     }
 
-    public User(Long id, String name, String username, String password, String authorities, String observation, List<Event> participation) {
+    public User(Long id, String name, String username, String password, String email, String phone, String authorities, List<Event> participation) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
+        this.email = email;
         this.authorities = authorities;
-        this.observation =observation;
+        this.phone = phone;
         this.participation = participation;
     }
 
