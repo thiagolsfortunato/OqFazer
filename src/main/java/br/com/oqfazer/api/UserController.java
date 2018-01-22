@@ -26,7 +26,6 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path = "/user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> save(@RequestBody User user) {
         try {

@@ -11,16 +11,22 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="name" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
             <column name="username" type="varchar(15)">
                 <constraints nullable="false"/>
             </column>
             <column name="password" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(200)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="phone" type="varchar(200)">
                 <constraints nullable="true"/>
             </column>
             <column name="authorities" type="varchar(15)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="observation" type="varchar(500)">
                 <constraints nullable="true"/>
             </column>
         </createTable>
@@ -28,10 +34,12 @@
 
     <changeSet id="2" author="thiago">
         <insert tableName="user" dbms="mysql">
+            <column name="name" value="Oqfazer"/>
             <column name="username" value="user_oqfazer"/>
             <column name="password" value="$2a$10$E41FJtpQZwC.SItpj3Zg5.Ym7kCTfOvRoCjO4pp51O96Y2krG9iWi"/>
+            <column name="phone" value="12982261635"/>
+            <column name="email" value="user@oqfazer.com"/>
             <column name="authorities" value="ROLE_ADMIN"/>
-            <column name="observation" value="USER_ADMIN"/>
         </insert>
     </changeSet>
 

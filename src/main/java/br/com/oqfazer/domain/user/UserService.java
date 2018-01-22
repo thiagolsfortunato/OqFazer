@@ -36,7 +36,7 @@ public class UserService {
         User userEntity = loadUserByUsername(user.getUsername());
         if (userEntity != null) throw new ExistException();
         else {
-            userEntity = new User(user.getName(), user.getUsername(), encoder.encode(user.getPassword()), user.getEmail(), user.getAuthorities(), user.getPhone());
+            userEntity = new User(user.getName(), user.getUsername(), encoder.encode(user.getPassword()), user.getEmail(), user.getPhone(),  user.getAuthorities());
             userRepository.save(userEntity);
         }
         return userEntity;
