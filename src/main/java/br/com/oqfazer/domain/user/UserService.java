@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A classe UserService e reponsavel por gerenciar as operacoes de CRUD de usuario.
@@ -48,16 +49,23 @@ public class UserService {
      * para persistir no banco de dados.
      * @param user
      */
-    public User edit(final User user) {
+    public User edit(final User user) throws ExistException {
+        User userByid = userRepository.findById(user.getId());
+        User userEntity = userRepository.findByUsername(user.getUsername());
+        if(userEntity != null) compareUsers(userByid, userEntity);
         if(user.getPassword().equals("") || user.getPassword() == null){
-            User userEntity = userRepository.findById(user.getId());
-            user.setPassword(userEntity.getPassword());
+            user.setPassword(userByid.getPassword());
             return userRepository.save(user);
         }else {
             return userRepository.save(new User(user.getId(), user.getName(), user.getUsername(), encoder.encode(user.getPassword()), user.getEmail(), user.getAuthorities(), user.getPhone()));
         }
     }
 
+    private void compareUsers(final User user1, final User user2) throws ExistException {
+        if(!Objects.equals(user1, user2)) {
+            throw new ExistException();
+        }
+    }
     /**
      * O metodo e reponsavel por deletar usuario.
      * @param user

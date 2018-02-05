@@ -36,11 +36,15 @@ public class UserController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path = "/user", method = RequestMethod.PUT)
     public ResponseEntity<User> edit(@RequestBody User user) {
-        User userEntity = service.edit(user);
-        return new ResponseEntity(userEntity, HttpStatus.OK);
+        User userEntity = null;
+        try {
+            userEntity = service.edit(user);
+            return new ResponseEntity(userEntity, HttpStatus.OK);
+        } catch (ExistException e) {
+            return new ResponseEntity(userEntity, HttpStatus.CONFLICT);
+        }
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -50,7 +54,6 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path = "/username", method = RequestMethod.GET)
     public ResponseEntity<User> seachByUsername(@RequestParam("username") String username) {
         User userEntity = service.loadUserByUsername(username);
