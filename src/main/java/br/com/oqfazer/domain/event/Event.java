@@ -39,9 +39,9 @@ public class Event implements Serializable {
     @Column(name = "imageUrl", length = 70)
     private String imageUrl;
 
-    @ManyToOne(targetEntity = Category.class)
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "categories", nullable = false)
+    private Set<Category> categories;
 
     @ManyToOne(targetEntity = Region.class)
     @JoinColumn(name = "region_id", nullable = false)
@@ -57,47 +57,49 @@ public class Event implements Serializable {
 
     private Event() {}
 
-    public Event(String name, String description, Calendar event_date, String local, String imageUrl, Category category, Region region, User owner) {
+    public Event(String name, String description, Calendar event_date, String local, String imageUrl, Set<Category> categories, Region region, User owner) {
         this.name = name;
         this.description = description;
         this.event_date = event_date;
         this.local = local;
         this.imageUrl = imageUrl;
-        this.category = category;
+        this.categories = categories;
         this.region = region;
         this.owner = owner;
     }
 
-    public Event(Long id, String name, String description, Calendar event_date, String local, String imageUrl, Category category, Region region, User owner) {
+    public Event(Long id, String name, String description, Calendar event_date, String local, String imageUrl, Set<Category> categories, Region region, User owner) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.event_date = event_date;
         this.local = local;
         this.imageUrl = imageUrl;
-        this.category = category;
+        this.categories = categories;
         this.region = region;
         this.owner = owner;
     }
 
-    public Event(String name, String description, Calendar event_date, String local, String imageUrl, Region region, User owner, Set<User> participants) {
+    public Event(String name, String description, Calendar event_date, String local, String imageUrl, Set<Category> categories, Region region, User owner, Set<User> participants) {
         this.name = name;
         this.description = description;
         this.event_date = event_date;
         this.local = local;
         this.imageUrl = imageUrl;
+        this.categories = categories;
         this.region = region;
         this.owner = owner;
         this.participants = participants;
     }
 
-    public Event(Long id, String name, String description, Calendar event_date, String local, String imageUrl, Region region, User owner, Set<User> participants) {
+    public Event(Long id, String name, String description, Calendar event_date, String local, String imageUrl, Set<Category> categories, Region region, User owner, Set<User> participants) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.event_date = event_date;
         this.local = local;
         this.imageUrl = imageUrl;
+        this.categories = categories;
         this.region = region;
         this.owner = owner;
         this.participants = participants;

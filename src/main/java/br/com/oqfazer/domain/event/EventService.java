@@ -21,8 +21,6 @@ public interface EventService {
 
     Event findByName(String name);
 
-    List<Event> findByCategory(Category category);
-
     List<Event> findByRegion(Region region);
 
     List<Event> findByOwner(User owner);

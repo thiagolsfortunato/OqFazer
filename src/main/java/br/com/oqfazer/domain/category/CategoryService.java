@@ -58,7 +58,8 @@ public class CategoryService {
      * @return List<Category>
      */
     public List<Category> getAllCategories() {
-        return repository.findAll();
+        List<Category> categories = repository.findAll();
+        return categories;
     }
 
     /**

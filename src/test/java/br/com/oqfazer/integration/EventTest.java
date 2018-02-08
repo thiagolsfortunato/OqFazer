@@ -24,7 +24,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -68,15 +70,16 @@ public class EventTest extends AbstractApplicationTest {
     public void testCrud() throws Exception {
         ObjectMapper mapper = new ObjectMapper();
 
-        Category category = categoryService.save(new Category("Show", "show category", null));
-        cityService.save(new City("Sao Jose dos Campos", regionService.save(new Region("Vale do Paraiba", null))));
-        Region region = regionService.findByName("Vale do Paraiba");
+        Set<Category> categories = new HashSet<>();
+        categories.add(new Category("show category"));
+        cityService.save(new City("Bragança Paulista", regionService.save(new Region("Serra da Mantiqueira", null))));
+        Region region = regionService.findByName("Litoral Norte");
         User owner = userService.loadUserByUsername("user_oqfazer");
 
         /**
          * Test Insert
          */
-        Event event = new Event("Event 1", "Desc Event 1", Calendar.getInstance(), "Local do Evento", "image.jpg", category, region, owner);
+        Event event = new Event("Event 1", "Desc Event 1", Calendar.getInstance(), "Local do Evento", "image.jpg", categories, region, owner);
         String jsonInString = mapper.writeValueAsString(event);
         int status = super.mockMvcPerformAuthenticatedPostStatus("/api/event", jsonInString, MediaType.APPLICATION_JSON_VALUE, status().isCreated(), token);
         Assert.assertEquals(201, status);
@@ -91,12 +94,12 @@ public class EventTest extends AbstractApplicationTest {
         /**
          * Test Edit
          */
-        eventEntity.setName("Jacareí");
+        eventEntity.setName("Event 2");
         jsonInString = mapper.writeValueAsString(eventEntity);
         status = super.mockMvcPerformAuthenticatedPutResult("/api/event", jsonInString, MediaType.APPLICATION_JSON_VALUE, status().isOk(), token);
         Assert.assertEquals(200, status);
 
-        /**
+         /**
          * Test Delete
          */
         jsonInString = mapper.writeValueAsString(eventEntity);

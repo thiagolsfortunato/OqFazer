@@ -1,6 +1,7 @@
 package br.com.oqfazer.domain.event.impl;
 
 import br.com.oqfazer.domain.category.Category;
+import br.com.oqfazer.domain.category.CategoryService;
 import br.com.oqfazer.domain.event.Event;
 import br.com.oqfazer.domain.event.EventRepository;
 import br.com.oqfazer.domain.event.EventService;
@@ -18,11 +19,20 @@ public class EventServiceImpl implements EventService {
     @Autowired
     private EventRepository repository;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @Override
     public Event save(Event event) throws ExistException {
         Event eventEntity = this.findByName(event.getName());
         if (eventEntity != null ) throw new ExistException();
-        else return repository.save(event);
+        else {
+            for (Category cat : event.getCategories()) {
+                if (cat.getId() == null) categoryService.save(cat);
+            }
+            eventEntity = repository.save(event);
+            return eventEntity;
+        }
     }
 
     @Override
@@ -48,11 +58,6 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event findByName(String name) {
         return repository.findByName(name);
-    }
-
-    @Override
-    public List<Event> findByCategory(Category category) {
-        return repository.findByCategory(category);
     }
 
     @Override

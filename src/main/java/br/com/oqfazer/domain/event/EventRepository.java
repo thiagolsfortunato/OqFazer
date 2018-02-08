@@ -19,8 +19,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     Event findByName(String name);
 
-    List<Event> findByCategory(Category category);
-
     List<Event> findByRegion(Region region);
 
     List<Event> findByOwner(User owner);

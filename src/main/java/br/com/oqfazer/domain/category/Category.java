@@ -1,5 +1,6 @@
 package br.com.oqfazer.domain.category;
 
+import br.com.oqfazer.domain.event.Event;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -27,31 +28,16 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", length = 20)
+    @Column(name = "name", length = 20, unique = true)
     private String name;
 
-    @Column(name = "description", length = 50)
-    private String description;
-
-    @ManyToOne(targetEntity = Category.class)
-    @JoinColumn(name = "parent")
-    private Category parent;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE)
-    private List<Category> sons = new LinkedList<>();
-
-    public Category(final String name, final String description, final Category parent) {
+    public Category(final String name) {
         this.name = name;
-        this.description = description;
-        this.parent = parent;
     }
 
-    public Category(final Long id, final String name, final String description, final Category parent) {
+    public Category(final Long id, final String name) {
         this.id = id;
         this.name = name;
-        this.description = description;
-        this.parent = parent;
     }
 
     public Category(){}
