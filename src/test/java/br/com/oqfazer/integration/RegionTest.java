@@ -48,7 +48,7 @@ public class RegionTest extends AbstractApplicationTest {
         /**
          * Test Insert
          */
-        Region region = new Region("Vale do Paraiba", null);
+        Region region = new Region("Serra da Mantiqueira", null);
         String jsonInString = mapper.writeValueAsString(region);
         int status = super.mockMvcPerformAuthenticatedPostStatus("/api/region", jsonInString, MediaType.APPLICATION_JSON_VALUE, status().isCreated(), token);
         Assert.assertEquals(201, status);
@@ -56,7 +56,7 @@ public class RegionTest extends AbstractApplicationTest {
         /**
          * Test Search By Name
          */
-        String result = super.mockMvcPerformGetRequestParam("/api/region", "name", "Vale do Paraiba");
+        String result = super.mockMvcPerformGetRequestParam("/api/region", "name", "Serra da Mantiqueira");
         Region regionEntity = mapper.readValue(result, Region.class);
         Assert.assertNotNull(regionEntity);
 

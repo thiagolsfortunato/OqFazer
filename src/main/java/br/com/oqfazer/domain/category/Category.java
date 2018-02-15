@@ -28,7 +28,7 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", length = 20, unique = true)
+    @Column(name = "name", length = 30, unique = true)
     private String name;
 
     public Category(final String name) {

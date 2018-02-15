@@ -2,10 +2,10 @@ package br.com.oqfazer.domain.event.impl;
 
 import br.com.oqfazer.domain.category.Category;
 import br.com.oqfazer.domain.category.CategoryService;
+import br.com.oqfazer.domain.city.City;
 import br.com.oqfazer.domain.event.Event;
 import br.com.oqfazer.domain.event.EventRepository;
 import br.com.oqfazer.domain.event.EventService;
-import br.com.oqfazer.domain.region.Region;
 import br.com.oqfazer.domain.user.User;
 import br.com.oqfazer.exception.ExistException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +61,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> findByRegion(Region region) {
-        return repository.findByRegion(region);
+    public List<Event> findByCity(City city) {
+        return repository.findByCity(city);
     }
 
     @Override

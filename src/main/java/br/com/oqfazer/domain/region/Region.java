@@ -19,7 +19,7 @@ public class Region {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", length = 15)
+    @Column(name = "name", length = 50)
     private String name;
 
     @JsonIgnore

@@ -1,16 +1,13 @@
 package br.com.oqfazer.domain.event;
 
 import br.com.oqfazer.domain.category.Category;
-import br.com.oqfazer.domain.region.Region;
+import br.com.oqfazer.domain.city.City;
 import br.com.oqfazer.domain.user.User;
 import lombok.Data;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -23,7 +20,7 @@ public class Event implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", length = 50)
+    @Column(name = "name", length = 70)
     private String name;
 
     @Column(name = "description", length = 70)
@@ -43,9 +40,9 @@ public class Event implements Serializable {
     @JoinColumn(name = "categories", nullable = false)
     private Set<Category> categories;
 
-    @ManyToOne(targetEntity = Region.class)
-    @JoinColumn(name = "region_id", nullable = false)
-    private Region region;
+    @ManyToOne(targetEntity = City.class)
+    @JoinColumn(name = "city_id", nullable = false)
+    private City city;
 
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "owner", nullable = false)
@@ -55,20 +52,21 @@ public class Event implements Serializable {
     @JoinColumn(name = "participants")
     private Set<User> participants;
 
-    private Event() {}
+    private Event() {
+    }
 
-    public Event(String name, String description, Calendar event_date, String local, String imageUrl, Set<Category> categories, Region region, User owner) {
+    public Event(String name, String description, Calendar event_date, String local, String imageUrl, Set<Category> categories, City city, User owner) {
         this.name = name;
         this.description = description;
         this.event_date = event_date;
         this.local = local;
         this.imageUrl = imageUrl;
         this.categories = categories;
-        this.region = region;
+        this.city = city;
         this.owner = owner;
     }
 
-    public Event(Long id, String name, String description, Calendar event_date, String local, String imageUrl, Set<Category> categories, Region region, User owner) {
+    public Event(Long id, String name, String description, Calendar event_date, String local, String imageUrl, Set<Category> categories, City city, User owner) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -76,23 +74,23 @@ public class Event implements Serializable {
         this.local = local;
         this.imageUrl = imageUrl;
         this.categories = categories;
-        this.region = region;
+        this.city = city;
         this.owner = owner;
     }
 
-    public Event(String name, String description, Calendar event_date, String local, String imageUrl, Set<Category> categories, Region region, User owner, Set<User> participants) {
+    public Event(String name, String description, Calendar event_date, String local, String imageUrl, Set<Category> categories, City city, User owner, Set<User> participants) {
         this.name = name;
         this.description = description;
         this.event_date = event_date;
         this.local = local;
         this.imageUrl = imageUrl;
         this.categories = categories;
-        this.region = region;
+        this.city = city;
         this.owner = owner;
         this.participants = participants;
     }
 
-    public Event(Long id, String name, String description, Calendar event_date, String local, String imageUrl, Set<Category> categories, Region region, User owner, Set<User> participants) {
+    public Event(Long id, String name, String description, Calendar event_date, String local, String imageUrl, Set<Category> categories, City city, User owner, Set<User> participants) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -100,7 +98,7 @@ public class Event implements Serializable {
         this.local = local;
         this.imageUrl = imageUrl;
         this.categories = categories;
-        this.region = region;
+        this.city = city;
         this.owner = owner;
         this.participants = participants;
     }

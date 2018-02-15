@@ -1,6 +1,7 @@
 package br.com.oqfazer.domain.event;
 
 import br.com.oqfazer.domain.category.Category;
+import br.com.oqfazer.domain.city.City;
 import br.com.oqfazer.domain.region.Region;
 import br.com.oqfazer.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,7 +20,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     Event findByName(String name);
 
-    List<Event> findByRegion(Region region);
+    List<Event> findByCity(City city);
 
     List<Event> findByOwner(User owner);
 

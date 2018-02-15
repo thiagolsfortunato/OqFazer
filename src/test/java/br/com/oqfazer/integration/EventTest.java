@@ -72,14 +72,13 @@ public class EventTest extends AbstractApplicationTest {
 
         Set<Category> categories = new HashSet<>();
         categories.add(new Category("show category"));
-        cityService.save(new City("Bragança Paulista", regionService.save(new Region("Serra da Mantiqueira", null))));
-        Region region = regionService.findByName("Litoral Norte");
+        City city = cityService.findByName("São José dos Campos");
         User owner = userService.loadUserByUsername("user_oqfazer");
 
         /**
          * Test Insert
          */
-        Event event = new Event("Event 1", "Desc Event 1", Calendar.getInstance(), "Local do Evento", "image.jpg", categories, region, owner);
+        Event event = new Event("Event 1", "Desc Event 1", Calendar.getInstance(), "Local do Evento", "image.jpg", categories, city, owner);
         String jsonInString = mapper.writeValueAsString(event);
         int status = super.mockMvcPerformAuthenticatedPostStatus("/api/event", jsonInString, MediaType.APPLICATION_JSON_VALUE, status().isCreated(), token);
         Assert.assertEquals(201, status);

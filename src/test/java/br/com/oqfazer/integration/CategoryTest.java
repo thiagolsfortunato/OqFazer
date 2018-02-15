@@ -45,7 +45,7 @@ public class CategoryTest extends AbstractApplicationTest {
         /**
          * Test Insert
          */
-        Category category = new Category("Show");
+        Category category = new Category("Show de Rock");
         String jsonInString = mapper.writeValueAsString(category);
         int status = super.mockMvcPerformAuthenticatedPostStatus("/api/category", jsonInString, MediaType.APPLICATION_JSON_VALUE, status().isCreated(), token);
         Assert.assertEquals(201, status);
@@ -53,7 +53,7 @@ public class CategoryTest extends AbstractApplicationTest {
         /**
          * Test Search By Name
          */
-        String result = super.mockMvcPerformGetRequestParam("/api/category", "name", "Show");
+        String result = super.mockMvcPerformGetRequestParam("/api/category", "name", "Show de Rock");
         Category categoryParent = mapper.readValue(result, Category.class);
         Assert.assertNotNull(categoryParent);
 
