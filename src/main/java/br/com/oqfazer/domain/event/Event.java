@@ -52,7 +52,7 @@ public class Event implements Serializable {
     @JoinColumn(name = "participants")
     private Set<User> participants;
 
-    private Event() {
+    public Event() {
     }
 
     public Event(String name, String description, Calendar event_date, String local, String imageUrl, Set<Category> categories, City city, User owner) {

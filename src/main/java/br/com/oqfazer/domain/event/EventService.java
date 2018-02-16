@@ -3,24 +3,29 @@ package br.com.oqfazer.domain.event;
 import br.com.oqfazer.domain.city.City;
 import br.com.oqfazer.domain.user.User;
 import br.com.oqfazer.exception.ExistException;
+import br.com.oqfazer.transport.CityVO;
+import br.com.oqfazer.transport.EventVO;
+import br.com.oqfazer.transport.UserVO;
 
 import java.util.List;
 
 public interface EventService {
 
-    Event save(Event event) throws ExistException;
+    EventVO save(EventVO eventVO) throws ExistException;
 
-    Event edit(Event event);
+    EventVO edit(EventVO eventVO);
 
-    void delete(Event event);
+    void delete(EventVO eventVO);
 
-    List<Event> getAllEvents();
+    List<EventVO> getAllEvents();
 
-    Event findById(Long id);
+    EventVO findById(Long id);
 
-    Event findByName(String name);
+    EventVO findByName(String name);
 
-    List<Event> findByCity(City city);
+    List<EventVO> findByCity(CityVO cityVO);
 
-    List<Event> findByOwner(User owner);
+    List<EventVO> findByOwner(UserVO ownerVO);
+
+    List<EventVO> findByParticipation(UserVO participationVO);
 }
