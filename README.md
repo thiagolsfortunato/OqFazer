@@ -1,6 +1,6 @@
 ## OqFazer ##
 
-[ ![Codeship Status for thiagolsfortunato/OqFazer-UI](https://app.codeship.com/projects/1abfe470-3b31-0136-36f6-4aa2219ea767/status?branch=develop)](https://app.codeship.com/projects/290283)
+[ ![Codeship Status for thiagolsfortunato/OqFazer](https://app.codeship.com/projects/8347e070-3b30-0136-ff5f-125baf79bb6b/status?branch=develop)](https://app.codeship.com/projects/290282)
 
 ## Tecnologias: ##
 
