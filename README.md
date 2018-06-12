@@ -1,6 +1,6 @@
 ## OqFazer ##
 
-[ ![Codeship Status for thiagolsfortunato/OqFazer](https://app.codeship.com/projects/8347e070-3b30-0136-ff5f-125baf79bb6b/status?branch=develop)](https://app.codeship.com/projects/290282)
+[ ![Codeship Status for thiagolsfortunato/OqFazer](https://app.codeship.com/projects/8347e070-3b30-0136-ff5f-125baf79bb6b/status?branch=develop)](https://app.codeship.com/projects/290282) [ ![Code Climate Status for thiagolsfortunato/OqFazer](https://codeclimate.com/github/thiagolsfortunato/OqFazer.png)](https://codeclimate.com/github/thiagolsfortunato/OqFazer)
 
 ## Tecnologias: ##
 
